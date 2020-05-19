@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section id="create">
+    {% for name, cols in schema %}
+    <form action="./create" method="POST">
+      <p>Table: <a href="/table/{{name}}">{{ name }}</a> (records: {{ cols.count }})</p>
+
+      <fieldset>
+        <table>
+        {% for col in cols %}
+          {% if col.name != "id" and col.name != "count" %}
+            <tr>
+              <td><label for="{{ name }}-{{ col.name}}">{{ col.name }}</label></td>
+              <td>
+                {% if col.fk %}
+                  <select id="{{ name }}-{{ col.name}}" name="{{ col.name }}" {% if col.notnull == 1 %}required{% endif %}>
+                    {% for val in col.fk.values %}
+                    <option value="{{ val }}">{{ val }}</option>
+                    {% endfor %}
+                  <select>
+                  <a href="/table/{{ col.fk.table }}">create new</a>
+                {% else %}
+                  <input id="{{ name }}-{{ col.name}}" name="{{ col.name }}" type="text" value="" {% if col.notnull == 1 %}required{% endif %}>
+                {% endif %}
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+        </table>
+
+        <div>
+          <input type="submit" value="Save">
+        </div>
+      </fieldset>
+      {% endfor %}
+    </form>
+  </section>
+
+  {% if data|length != 0 %}
+    <section id="data">
+      <h2>Data</h2>
+
+      {% if data|length > 0 %}
+        <form disabled>
+          <table id="data-rows">
+            <tr>
+              {% for col, val in data[0] %}
+              <th>{{ col }}</th>
+              {% endfor %}
+            </tr>
+
+            {% for row in data %}
+              <tr>
+                {% for col, val in row %}
+                  <td>{{ val }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          <table>
+        </form>
+      {% endif %}
+    </section>
+  {% endif %}
+{% endblock %}

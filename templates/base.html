@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Software catalog</title>
+    <link rel="stylesheet" href="/css/universal.css" />
+    {% block styles %}{% endblock %}
+  </head>
+
+  <body>
+    <header>
+      {% block title %}
+        <h1><a href="/">{{ title }}</a></h1>
+      {% endblock %}
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      {% block footer %}{% endblock %}
+    </footer>
+
+    <script src="/js/universal.js" async defer></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
