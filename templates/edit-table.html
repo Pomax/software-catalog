@@ -2,13 +2,16 @@
 
 {% block content %}
   <section id="create">
-    {% for name, cols in schema %}
-    <form action="./create" method="POST">
-      <p>Table: <a href="/table/{{name}}">{{ name }}</a> (records: {{ cols.count }})</p>
+    <form action="./{% if editRecord %}edit{% else %}create{% endif %}" method="POST">
+      <p>Table: <a href=".">{{ tableName }}</a> (records: {{ schema.count }})</p>
+
+      {% if query %}
+      <input type="hidden" name="query" value="{{ query }}">
+      {% endif %}
 
       <fieldset>
         <table>
-        {% for col in cols %}
+        {% for col in schema %}
           {% if col.name != "id" and col.name != "count" %}
             <tr>
               <td><label for="{{ name }}-{{ col.name}}">{{ col.name }}</label></td>
@@ -16,12 +19,12 @@
                 {% if col.fk %}
                   <select id="{{ name }}-{{ col.name}}" name="{{ col.name }}" {% if col.notnull == 1 %}required{% endif %}>
                     {% for val in col.fk.values %}
-                    <option value="{{ val }}">{{ val }}</option>
+                    <option value="{{ val }}" {% if editRecord and editRecord[col.name] == val %}selected{% endif %}>{{ val }}</option>
                     {% endfor %}
                   <select>
                   <a href="/table/{{ col.fk.table }}">create new</a>
                 {% else %}
-                  <input id="{{ name }}-{{ col.name}}" name="{{ col.name }}" type="text" value="" {% if col.notnull == 1 %}required{% endif %}>
+                  <input id="{{ name }}-{{ col.name}}" name="{{ col.name }}" type="text" value="{% if editRecord %}{{ editRecord[col.name] }}{% endif %}" {% if col.notnull == 1 %}required{% endif %}>
                 {% endif %}
               </td>
             </tr>
@@ -33,7 +36,6 @@
           <input type="submit" value="Save">
         </div>
       </fieldset>
-      {% endfor %}
     </form>
   </section>
 
@@ -48,6 +50,8 @@
               {% for col, val in data[0] %}
               <th>{{ col }}</th>
               {% endfor %}
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
             </tr>
 
             {% for row in data %}
@@ -55,6 +59,8 @@
                 {% for col, val in row %}
                   <td>{{ val }}</td>
                 {% endfor %}
+                <td><a class="large bare" title="edit" href="./?{{ row.where }} ">🖉</a></td>
+                <td><a class="large bare" title="delete" href="./delete/?{{ row.where }} ">🗑</a></td>
               </tr>
             {% endfor %}
           <table>
