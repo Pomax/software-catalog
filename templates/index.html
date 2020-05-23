@@ -1,15 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form action="/create" method="GET">
-    <input type="text" name="tablename" id="new-table" placeholder="new table name..." required>
-    <input type="submit" value="Create new table">
-  </form>
-
   {% for name, cols in schema %}
   <section>
-    <form disabled>
-      <p>Table: <a href="/table/{{name}}">{{ name }}</a> (records: {{ cols.count }})</p>
+    <form disabled class="schema">
+      <h3><a href="/table/{{name}}">{{ name }}</a> <small>({{ cols.count }} record{% if cols.count!=1 %}s{% endif %})</small></h3>
 
       <fieldset>
         <table>
@@ -23,7 +18,7 @@
                 <span>
                   {{ col.type }}
                   {% if col.notnull==1 %}NOT NULL{% endif %}
-                  {% if col.pk != 0 %}(*){% endif %}
+                  {% if col.pk != 0 %}(primary){% endif %}
                   {% if col.fk %} (FK to {{ col.fk.table }}.{{ col.fk.to }}){% endif %}
                 </span>
               </td>
@@ -41,10 +36,16 @@
     </form>
   </section>
   {% endfor %}
+
+  <form action="/create" method="GET">
+    <p>Create a new table:</p>
+    <input type="text" name="tablename" id="new-table" placeholder="new table name..." required>
+    <input type="submit" value="Create new table">
+  </form>
 {% endblock %}
 
 {% block footer %}
   <form action="/shutdown" method="post">
-    <input type="button" value="Shut down server">
+    <button>Shut down server</button>
   </form>
 {% endblock %}

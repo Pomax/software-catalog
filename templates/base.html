@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Software catalog</title>
-    <link rel="stylesheet" href="/css/universal.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     {% block styles %}{% endblock %}
   </head>
 
@@ -23,7 +23,8 @@
       {% block footer %}{% endblock %}
     </footer>
 
-    <script src="/js/universal.js" async defer></script>
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+      <script src="/js/base.js" async defer></script>
+    {% endblock %}
   </body>
 </html>

@@ -1,3 +1,54 @@
 {
-    "title": "Audio Software Catalogue"
+    "title": "Audio Software Catalogue",
+    "port": 80,
+    "bootstrap": {
+        "useForeignKeys": true,
+        "tables": [
+            {
+                "name": "type",
+                "schema": {
+                    "type": "TEXT PRIMARY KEY NOT NULL ON UPDATE CASCADE"
+                }
+            },
+            {
+                "name": "company",
+                "schema": {
+                    "name": "TEXT PRIMARY KEY NOT NULL ON UPDATE CASCADE",
+                    "website": "TEXT",
+                    "username": "TEXT",
+                    "password": "TEXT"
+                }
+            },
+            {
+                "name": "product",
+                "schema": {
+                    "id": "INTEGER PRIMARY KEY AUTOINCREMENT",
+                    "company": "TEXT NOT NULL",
+                    "name": "TEXT NOT NULL",
+                    "serial": "TEXT",
+                    "type": "TEXT",
+                    "url": "TEXT",
+                    "description": "TEXT"
+                },
+                "constraints": [
+                    "FOREIGN KEY(company) REFERENCES company(name) ON UPDATE CASCADE",
+                    "FOREIGN KEY(type) REFERENCES type(type) ON UPDATE CASCADE"
+                ]
+            }
+        ]
+    },
+    "nowrap": {
+        "company": ["name"],
+        "product": ["company", "name" ]
+    },
+    "ellipsed": {
+        "company": ["website"],
+        "product": ["serial", "url", "description"]
+    },
+    "omit": {
+        "product": ["id"]
+    },
+    "defaultSort": {
+        "product": ["company", "name"]
+    }
 }

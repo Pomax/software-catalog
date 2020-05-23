@@ -1,0 +1,29 @@
+form {
+  background: #fffbef;
+  padding: 1em;
+  border-radius: 0.5em;
+  color: #222;
+  margin: 0.5em;
+}
+
+form[action="/drop"] {
+  position: absolute;
+  width: 13em;
+  top: 0;
+  right: 0;
+  background: transparent;
+}
+
+form[action="/drop"] input[type="checkbox"]:invalid:not(:focus) {
+  box-shadow: none;
+}
+
+form input[type="submit"] {
+  float: right;
+}
+
+form.schema fieldset {
+  font-size: 68%;
+  font-family: Arial;
+  line-height: 0.5;
+}

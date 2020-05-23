@@ -26,12 +26,17 @@ const fieldTemplate = (fnum) => `
 <td>
   <input type="checkbox" name="pk-${fnum}">
 </td>
+
+<td>
+  <span class="delete" style="cursor:pointer">🗑</span>
+</td>
 `;
 
 function addField() {
   let row = document.createElement("tr");
   row.innerHTML = fieldTemplate(columns.children.length);
   columns.appendChild(row);
+  row.querySelector('.delete').addEventListener('click', () => columns.removeChild(row));
 }
 
 
@@ -42,10 +47,15 @@ const constraintTemplate = (fnum) => `
 <td>
     <input type="text" name="constraint-${fnum}" required>
 </td>
+
+<td style="text-align:center;">
+  <span class="delete" style="cursor:pointer">🗑</span>
+</td>
 `;
 
 function addConstraint() {
   let row = document.createElement("tr");
   row.innerHTML = constraintTemplate(constraints.children.length);
   constraints.appendChild(row);
+  row.querySelector('.delete').addEventListener('click', () => constraints.removeChild(row));
 }

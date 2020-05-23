@@ -4,23 +4,24 @@
   <section id="create">
     <form action="." method="POST">
       <input type="hidden" name="tablename" value="{{ tableName }}">
-      <input type="button" value="Add field" id="add-field">
-      <input type="button" value="Add constraint" id="add-constraint">
 
       <p>Table definition for {{ tableName }}</p>
 
       <fieldset>
+        <p>Plain fields <input type="button" value="Add field" id="add-field"></p>
         <table id="columns">
           <tr>
             <th>field name</th>
             <th>field type</th>
             <th>required</th>
             <th>primary key</th>
+            <th>&nbsp</th>
           </tr>
         </table>
 
+        <p>Constraints <input type="button" value="Add constraint" id="add-constraint"></p>
+        <p>(e.g. FOREIGN KEY(fieldname) REFERENCES othertable(itsfield) ON UPDATE CASCADE)</p>
         <table id="constraints">
-          <tr><th>constraint</th></tr>
         </table>
 
         <div><input type="submit" value="Save"></div>
