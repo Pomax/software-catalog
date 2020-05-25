@@ -14,6 +14,8 @@ function securityClick(evt) {
     }
 
     // otherwise, we update the href and then let it through.
-    link.href = link.dataset.confirmHref;
+    link.href = encodeURI(link.dataset.confirmHref).replace(/\+/g,'%2B');
+
+    console.log(link.href);
 }
 

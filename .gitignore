@@ -1,3 +1,3 @@
 node_modules
 lib/bootstrap-db.js
-default.sqlite3
+*.sqlite3

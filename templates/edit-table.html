@@ -19,12 +19,21 @@
                 {% if col.fk %}
                   <select id="{{ name }}-{{ col.name}}" name="{{ col.name }}" {% if col.notnull == 1 %}required{% endif %}>
                     {% for val in col.fk.values %}
-                    <option value="{{ val }}" {% if record and record[col.name] == val %}selected{% endif %}>{{ val }}</option>
+                    <option
+                      value="{{ val }}"
+                      {% if (record and record[col.name] == val) or (record == false and val == data.preselect[col.name]) %}selected{% endif %}
+                    >{{ val }}</option>
                     {% endfor %}
                   <select>
                   <a href="/table/{{ col.fk.table }}">create new</a>
                 {% else %}
-                  <input id="{{ name }}-{{ col.name}}" name="{{ col.name }}" type="text" value="{% if record %}{{ record[col.name] }}{% endif %}" {% if col.notnull == 1 %}required{% endif %}>
+                  <input
+                    id="{{ name }}-{{ col.name}}"
+                    name="{{ col.name }}"
+                    type="text"
+                    value="{% if record %}{{ record[col.name] }}{% endif %}" {% if col.notnull == 1 %}required{% endif %}
+                    {% if col.name in data.autofocus %}autofocus{% endif %}
+                  >
                 {% endif %}
               </td>
             </tr>
@@ -44,50 +53,48 @@
     <section id="data">
       <h2>Data</h2>
 
-      {% if data|length > 0 %}
-        <form disabled>
-          <table id="data-rows">
-            <thead>
-              <tr>
-                {% for col, val in data[0] %}
-                  {% if col not in data.omit %}
-                    <th>{{ col }}</th>
-                  {% endif %}
-                {% endfor %}
-                <th>&nbsp;</th>
-              </tr>
-            </thead>
+      <form disabled>
+        <table id="data-rows">
+          <thead>
+            <tr>
+              {% for col, val in data[0] %}
+                {% if col not in data.omit %}
+                  <th>{{ col }}</th>
+                {% endif %}
+              {% endfor %}
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
 
-            <tbody>
-            {% for row in data %}
-              <tr>
-                {% for col, val in row %}
-                  {% if col not in data.omit %}
-                    <td class="
-                      {% if col in data.nowrap %}nowrap{% endif %}
-                      {% if col in data.ellipsed %}ellipsed{% endif %}
-                    ">
-                    {% if col=="username" or col=="password" %}
-                      <input type="password" value="{{ val }}" disabled>
-                    {% elif col=="website" or col=="url" %}
-                      <a href="{{val}}">{{ val }}</a>
-                    {% else %}
-                      {{ val }}
-                    {% endif %}
-                    </td>
+          <tbody>
+          {% for row in data %}
+            <tr>
+              {% for col, val in row %}
+                {% if col not in data.omit %}
+                  <td class="
+                    {% if col in data.nowrap %}nowrap{% endif %}
+                    {% if col in data.ellipsed %}ellipsed{% endif %}
+                  ">
+                  {% if col in data.secure %}
+                    <input type="password" value="{{ val }}" style="width: {{ val|length }}em" disabled>
+                  {% elif col in data.urlform %}
+                    <a href="{{val}}">{{ val }}</a>
+                  {% else %}
+                    {{ val }}
                   {% endif %}
-                {% endfor %}
-                <td>
-                  <a class="large bare" title="edit" href="./?{{ row.where }}">🖉</a>
-                  &nbsp;
-                  <a class="large bare" title="delete" href="." data-confirm-href="./delete/?{{ row.where }}">🗑</a>
-                </td>
-              </tr>
-            {% endfor %}
-            </tbody>
-          </table>
-        </form>
-      {% endif %}
+                  </td>
+                {% endif %}
+              {% endfor %}
+              <td>
+                <a class="large bare" title="edit" href="./?{{ row.where }}">🖉</a>
+                &nbsp;
+                <a class="large bare" title="delete" href="." data-confirm-href="./delete/?{{ row.where }}">🗑</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </form>
     </section>
   {% endif %}
 {% endblock %}
