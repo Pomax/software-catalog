@@ -21,7 +21,6 @@ table#data-rows tr th {
   text-align: left;
   border-bottom: 1px solid black;
   font-variant: small-caps;
-  cursor: pointer;
 }
 
 table#data-rows tr th:nth-last-child(1) {

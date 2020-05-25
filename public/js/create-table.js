@@ -37,9 +37,10 @@ function addField() {
   let row = document.createElement("tr");
   row.innerHTML = fieldTemplate(columns.children.length);
   columns.appendChild(row);
-  row.querySelector('.delete').addEventListener('click', () => columns.removeChild(row));
+  row
+    .querySelector(".delete")
+    .addEventListener("click", () => columns.removeChild(row));
 }
-
 
 const constraintButton = document.getElementById("add-constraint");
 constraintButton.addEventListener("click", addConstraint);
@@ -58,5 +59,7 @@ function addConstraint() {
   let row = document.createElement("tr");
   row.innerHTML = constraintTemplate(constraints.children.length);
   constraints.appendChild(row);
-  row.querySelector('.delete').addEventListener('click', () => constraints.removeChild(row));
+  row
+    .querySelector(".delete")
+    .addEventListener("click", () => constraints.removeChild(row));
 }
