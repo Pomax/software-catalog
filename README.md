@@ -2,6 +2,10 @@
 
 I needed a simple bit of software cataloging software that didn't require a spreadsheet program for writing own which audio software I owned. Several years of [rekkerd](https://rekkerd.org/deals-deals-deals/) have left me with a horribly fragmented list of effects and instruments, and I just need to know what I own. However, in order to write something half-useful I had to make it generic enough to probably be useful to you, too.
 
+- [How to run this](#how-to-run-this)
+- [Configuration](#changing-config-json)
+- [Screenshots](#screenshots)
+
 ## How to run this
 
 This tool required Node.js, which you can install for Windows with [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) or with [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) on basically every other OS.
