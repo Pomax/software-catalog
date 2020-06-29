@@ -139,6 +139,25 @@ This is used to specify what the preselected option should be for a foreign key 
   },
 ```
 
-## Running without a config file
+### Running without a config file
 
 You _can_, if you really want, forego the config file entirely. It'd be a bit silly, but if you _absolutely_ just want to start out empty, you most certainly can: the web interface lets you create tables and table records, so you could just start with nothing and take it from there. If you do, though, you can still specify the filename of your database using the `-c database` runtime option.
+
+
+## Screenshots
+
+Main overview/landing page:
+
+![main view](https://user-images.githubusercontent.com/177243/85972699-8e745900-b985-11ea-8c91-660fe24b96f7.png)
+
+Creating a new table:
+
+![new table](https://user-images.githubusercontent.com/177243/85972787-bd8aca80-b985-11ea-9cef-82fe50851fa8.png)
+
+Table overview:
+
+![table view](https://user-images.githubusercontent.com/177243/85972735-9fbd6580-b985-11ea-9157-bed9f05221ee.png)
+
+Creating/editing a table record:
+
+![edit view](https://user-images.githubusercontent.com/177243/85972758-aba92780-b985-11ea-99c1-47a4a3d9e714.png)
