@@ -1,8 +1,8 @@
 {
-  "title": "Audio Software Catalogue",
+  "title": "Software Catalogue",
   "port": 80,
   "bootstrap": {
-    "path": "audio.sqlite3",
+    "path": "example.sqlite3",
     "tables": [
       {
         "name": "type",

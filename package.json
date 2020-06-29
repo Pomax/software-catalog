@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "postinstall": "npm run clean:nunjucks && npm run clean:sqlite",
+    "clean:nunjucks": "shx rm -rf ./node_modules/nunjucks/browser",
+    "clean:sqlite": "shx rm -rf ./node_modules/sqlite3/deps"
   },
   "author": "",
   "license": "ISC",

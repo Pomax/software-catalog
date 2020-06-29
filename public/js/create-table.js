@@ -11,12 +11,11 @@ const fieldTemplate = (fnum) => `
 
 <td>
   <select name="fieldtype-${fnum}">
+    <!-- <option value="NULL">NULL</option> -->
     <option value="TEXT">TEXT</option>
     <option value="INTEGER">INTEGER</option>
     <option value="REAL">REAL</option>
-    <option value="NUMERIL">INTEGER</option>
     <option value="BLOB">BLOB</option>
-    <!-- <option value="NULL">NULL</option> -->
   </select>
 </td>
 
