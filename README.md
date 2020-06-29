@@ -49,11 +49,11 @@ The `tables` section is an array of schema definitions for your database. Each s
   "schema": {
     "fieldName1": "TYPE [PRIMARY KEY] [NOT NULL]",
     "fieldName2": "...",
-    ...
+    "..."
   },
   "constraints": [
     "FOREIGN KEY(fieldname) REFERENCES otherTable(itsFieldName) ON UPDATE CASCADE",
-    ...
+    "..."
   ]
 }
 ```
@@ -76,12 +76,12 @@ The `prepopulate` section is an object where each key references a table by name
       "fieldName2": "etc."
     },
     {
-      ...
+      "..."
     },
-    ...
+    "..."
   ],
-  "tableName2": ...,
-  ...
+  "tableName2": "...",
+  "..."
 }
 ```
 
@@ -91,9 +91,9 @@ The last section is for specifying which tables and fields should receive specia
 
 ```json
   "functionName": {
-    "tableName1": ["fieldName1", "fieldName2", ...],
-    "tableName2": [...],
-    ...
+    "tableName1": ["fieldName1", "fieldName2", "..."],
+    "tableName2": ["..."],
+    "..."
   }
 ```
 
@@ -134,7 +134,7 @@ This is used to specify what the preselected option should be for a foreign key 
     "tableName": {
       "fieldName1": "Value to preselect",
       "fieldName2": "...",
-      ...
+      "..."
     }
   },
 ```
